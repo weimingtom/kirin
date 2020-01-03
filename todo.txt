@@ -1,0 +1,19 @@
+continue@loop
+bareak@loop
+and or xor
+
+
+//FIXME:
+//            for (i in 0 until new_size) {
+//                val elem =
+//                    (if (new_block[i] is ArrayElement?) new_block[i] else null) as ArrayElement?
+//                ClassType.Companion.Assert(
+//                    elem != null,
+//                    String.format("Need to derive type %1\$s from ArrayElement", t.GetTypeString())
+//                )
+//                elem!!.set_index(i)
+//                elem.set_array(new_block)
+//            }
+
+
+as Byte -> toByte() : runtime diff
