@@ -1,12 +1,11 @@
 ﻿package kirin
 
-import kotlin.jvm.JvmStatic
-
 //{
 object Program {
     @JvmStatic
     fun main(args: Array<String>) {
-        var args_ = emptyArray<String?>()
+        var args_ = arrayOfNulls<String?>(args.size)
+        args.copyInto(args_);
         //args = new String[] {"test/bisect.lua"};
         //args = new String[] {"test/cf.lua"};
         //args = new String[] {"test/echo.lua"};
@@ -26,6 +25,9 @@ object Program {
         //args = new String[] {"test/trace-calls.lua"}; // not tested
         //args = new String[] {"test/trace-globals.lua"};
         //args = new String[] {"test/xd.lua"}; //not tested
+
+//        var op: LuaOpCodes.OpCode = LuaOpCodes.OpCode.OP_ADD
+
         if (false) {
             LuacProgram.MainLuac(args_)
         } else {

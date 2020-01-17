@@ -1,11 +1,11 @@
 package kirin
 
-import kirin.LuaState.lua_State
 import kirin.CLib.CharPtr
-import kirin.LuaObject.Table
-import kirin.LuaState.GCObject
 import kirin.LuaObject.TString
+import kirin.LuaObject.Table
 import kirin.LuaObject.Udata
+import kirin.LuaState.GCObject
+import kirin.LuaState.lua_State
 import kirin.LuaState.stringtable
 
 //
@@ -67,10 +67,10 @@ object LuaString {
         while (i < tb.size) {
             var p: GCObject? = tb.hash!![i]
             while (p != null) { // for each node in the list
-                val next: GCObject = p!!.getGch().next!! // save next
+                val next: GCObject? = p.getGch().next // save next
                 val h: Long = LuaState.gco2ts(p).hash //uint - int
                 val h1 = CLib.lmod(h.toDouble(), newsize.toDouble()).toInt() // new position
-                LuaLimits.lua_assert(((h % newsize) as Int).toLong() == CLib.lmod(h.toDouble(), newsize.toDouble()))
+                LuaLimits.lua_assert(((h % newsize).toInt()).toLong() == CLib.lmod(h.toDouble(), newsize.toDouble()))
                 p.getGch().next = newhash[h1] // chain it
                 newhash[h1] = p
                 p = next

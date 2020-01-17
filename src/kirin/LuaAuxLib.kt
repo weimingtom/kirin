@@ -1,4 +1,5 @@
 package kirin
+
 import kirin.LuaState.lua_State
 import kirin.CLib.CharPtr
 import kirin.Lua.lua_CFunction
@@ -483,7 +484,7 @@ object LuaAuxLib {
 //		}
 ///#endif
 // }======================================================
-    fun luaL_gsub(L: lua_State?, s: CharPtr?, p: CharPtr, r: CharPtr?): CharPtr {
+    fun luaL_gsub(L: lua_State?, s: CharPtr?, p: CharPtr, r: CharPtr?): CharPtr? {
         var s: CharPtr? = s
         var wild: CharPtr? = null
         val l: Int = CLib.strlen(p) //(uint) - uint

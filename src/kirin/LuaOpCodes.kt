@@ -321,7 +321,7 @@ object LuaOpCodes {
     }
 
     fun getBMode(m: OpCode): OpArgMask {
-        return when (((luaP_opmodes[m.getValue()] as Long) shr 4 and 3).toInt()) {
+        return when (((luaP_opmodes[m.getValue()].toLong()) shr 4 and 3).toInt()) {
             0 -> OpArgMask.OpArgN
             1 -> OpArgMask.OpArgU
             2 -> OpArgMask.OpArgR
@@ -331,7 +331,7 @@ object LuaOpCodes {
     }
 
     fun getCMode(m: OpCode): OpArgMask {
-        return when (((luaP_opmodes[m.getValue()] as Long) shr 2 and 3).toInt()) {
+        return when (((luaP_opmodes[m.getValue()].toLong()) shr 2 and 3).toInt()) {
             0 -> OpArgMask.OpArgN
             1 -> OpArgMask.OpArgU
             2 -> OpArgMask.OpArgR
@@ -554,23 +554,23 @@ object LuaOpCodes {
             return intValue
         }
 
-        companion object {
-            private var mappings: HashMap<Int, OpCode>? = null
-            @Synchronized
-            private fun getMappings(): HashMap<Int, OpCode>? {
-                if (mappings == null) {
-                    mappings = HashMap()
-                }
-                return mappings
-            }
-
-            fun forValue(value: Int): OpCode? {
-                return getMappings()!![value]
-            }
-        }
+//        companion object {
+//            private var mappings: HashMap<Int, OpCode>? = null
+//            @Synchronized
+//            private fun getMappings(): HashMap<Int, OpCode>? {
+//                if (mappings == null) {
+//                    mappings = HashMap()
+//                }
+//                return mappings
+//            }
+//
+//            fun forValue(value: Int): OpCode? {
+//                return getMappings()!![value]
+//            }
+//        }
 
         init {
-            OpCode.getMappings()!![intValue] = this
+//            OpCode.getMappings()!![intValue] = this
         }
     }
 

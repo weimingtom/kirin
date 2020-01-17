@@ -34,7 +34,7 @@ object LuaIOLib {
         }
     }
 
-    private fun fileerror(L: lua_State, arg: Int, filename: CharPtr) {
+    private fun fileerror(L: lua_State, arg: Int, filename: CharPtr?) {
         LuaAPI.lua_pushfstring(L, CharPtr.Companion.toCharPtr("%s: %s"), filename, CLib.strerror(CLib.errno()))
         LuaAuxLib.luaL_argerror(L, arg, Lua.lua_tostring(L, -1))
     }
@@ -184,7 +184,7 @@ object LuaIOLib {
 
     private fun g_iofile(L: lua_State, f: Int, mode: CharPtr): Int {
         if (!Lua.lua_isnoneornil(L, 1.0)) {
-            val filename: CharPtr = Lua.lua_tostring(L, 1)
+            val filename: CharPtr? = Lua.lua_tostring(L, 1)
             if (CharPtr.Companion.isNotEqual(filename, null)) {
                 val pf = newfile(L)
                 pf.file = CLib.fopen(filename, mode)
@@ -324,14 +324,14 @@ object LuaIOLib {
                     val l = LuaAPI.lua_tointeger(L, n) as Int //uint - uint
                     if (l == 0) test_eof(L, f) else read_chars(L, f, l.toLong())
                 } else {
-                    val p: CharPtr = Lua.lua_tostring(L, n)
+                    val p: CharPtr? = Lua.lua_tostring(L, n)
                     LuaAuxLib.luaL_argcheck(
                         L,
-                        CharPtr.Companion.isNotEqual(p, null) && p.get(0) == '*',
+                        CharPtr.Companion.isNotEqual(p, null) && p!!.get(0) == '*',
                         n,
                         "invalid option"
                     )
-                    when (p.get(1)) {
+                    when (p!!.get(1)) {
                         'n' -> {
                             // number
                             read_number(L, f)

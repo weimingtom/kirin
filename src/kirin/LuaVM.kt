@@ -592,7 +592,7 @@ object LuaVM {
                     ) <= L.stacksize
                 )
                 LuaLimits.lua_assert(L.top === L.ci!!.top || LuaDebug.luaG_checkopenop(i) != 0)
-                //Dump(pc.pc, i);
+                Dump(pc.pc, i);
                 var reentry2 = false
                 when (LuaOpCodes.GET_OPCODE(i)) {
                     OpCode.OP_MOVE -> {

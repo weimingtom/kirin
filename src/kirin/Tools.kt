@@ -2,7 +2,7 @@ package kirin
 
 object Tools {
     fun sprintf(Format: String, vararg Parameters: Any?): String {
-        var Parameters_ = emptyArray<Any?>()
+        var Parameters_ = arrayOfNulls<Any?>(Parameters.count())
         Parameters.copyInto(Parameters_)
         var Format = Format
         var hasFloat = false

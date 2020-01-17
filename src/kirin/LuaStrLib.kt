@@ -435,15 +435,15 @@ object LuaStrLib {
         }
     }
 
-    private fun match(ms: MatchState, s: CharPtr?, p: CharPtr): CharPtr? {
+    private fun match(ms: MatchState, s: CharPtr?, p: CharPtr?): CharPtr? {
         var s: CharPtr? = s
-        var p: CharPtr = p
+        var p: CharPtr? = p
         s = CharPtr(s!!)
-        p = CharPtr(p)
+        p = CharPtr(p!!)
         //init: /* using goto's to optimize tail recursion */
         loop@ while (true) {
             var init = false
-            return when (p.get(0)) {
+            return when (p!!.get(0)) {
                 '(' -> {
                     // start capture
                     if (p.get(1) == ')') { // position capture?
@@ -858,7 +858,7 @@ object LuaStrLib {
         val ms = MatchState()
         val ls = IntArray(1) //uint
         val s: CharPtr? = LuaAPI.lua_tolstring(L!!, Lua.lua_upvalueindex(1), ls) //out
-        val p: CharPtr = Lua.lua_tostring(L, Lua.lua_upvalueindex(2))
+        val p: CharPtr? = Lua.lua_tostring(L, Lua.lua_upvalueindex(2))
         var src: CharPtr
         ms.L = L
         ms.src_init = s

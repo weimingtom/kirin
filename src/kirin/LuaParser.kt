@@ -1567,23 +1567,23 @@ object LuaParser {
             return intValue
         }
 
-        companion object {
-            private var mappings: HashMap<Int, expkind>? = null
-            @Synchronized
-            private fun getMappings(): HashMap<Int, expkind>? {
-                if (mappings == null) {
-                    mappings = HashMap()
-                }
-                return mappings
-            }
-
-            fun forValue(value: Int): expkind? {
-                return getMappings()!![value]
-            }
-        }
+//        companion object {
+//            private var mappings: HashMap<Int, expkind>? = null
+//            @Synchronized
+//            private fun getMappings(): HashMap<Int, expkind>? {
+//                if (mappings == null) {
+//                    mappings = HashMap()
+//                }
+//                return mappings
+//            }
+//
+//            fun forValue(value: Int): expkind? {
+//                return getMappings()!![value]
+//            }
+//        }
 
         init {
-            expkind.Companion.getMappings()!![intValue] = this
+//            expkind.Companion.getMappings()!![intValue] = this
         }
     }
 
@@ -1609,7 +1609,7 @@ object LuaParser {
         var u = LuaParser.expdesc._u()
         var t /* patch list of `exit when true' */ = 0
         var f /* patch list of `exit when false' */ = 0
-        var k = expkind.forValue(0)
+        var k = expkind.VVOID //expkind.forValue(0)
         fun Copy(e: expdesc) {
             k = e.k
             u.Copy(e.u)

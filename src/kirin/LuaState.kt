@@ -484,7 +484,11 @@ object LuaState {
         }
 
         fun getGch(): GCheader {
-            return this as GCheader
+            var result =  this as GCheader
+            if (result == null) {
+                println("=================");
+            }
+            return result;
         }
 
         fun getTs(): TString {

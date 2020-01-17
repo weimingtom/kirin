@@ -379,7 +379,7 @@ object CLib {
     var stdin: StreamProxy = StreamProxy.Companion.OpenStandardInput()
     var stderr: StreamProxy = StreamProxy.Companion.OpenStandardError()
     var EOF = -1
-    fun fputs(str: CharPtr, stream: StreamProxy?) {
+    fun fputs(str: CharPtr?, stream: StreamProxy?) {
         StreamProxy.Companion.Write(str.toString()) //FIXME:
     }
 

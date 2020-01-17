@@ -1,13 +1,13 @@
 package kirin
 
-import kirin.LuaState.lua_State
 import kirin.CLib.CharPtr
+import kirin.LuaObject.Node
+import kirin.LuaObject.TKey
+import kirin.LuaObject.TKey_nk
+import kirin.LuaObject.TString
 import kirin.LuaObject.TValue
 import kirin.LuaObject.Table
-import kirin.LuaObject.TString
-import kirin.LuaObject.TKey_nk
-import kirin.LuaObject.TKey
-import kirin.LuaObject.Node
+import kirin.LuaState.lua_State
 
 //
 // ** $Id: ltable.c,v 2.32.1.2 2007/12/28 15:32:23 roberto Exp $
@@ -66,7 +66,7 @@ object LuaTable {
 
     //public static Node gnode(Table t, int i)	{return t.node[i];}
     fun hashpow2(t: Table?, n: Double): LuaObject.Node { //lua_Number
-        return gnode(t, CLib.lmod(n, LuaObject.sizenode(t).toDouble()) as Int)
+        return gnode(t, CLib.lmod(n, LuaObject.sizenode(t).toDouble()).toInt())
     }
 
     fun hashstr(t: Table?, str: TString?): LuaObject.Node {
@@ -483,7 +483,7 @@ object LuaTable {
         if (!LuaObject.ttisnil(gval(mp)) || LuaObject.Node.Companion.isEqual(mp, dummynode)) {
             var othern: LuaObject.Node?
             val n = getfreepos(t) // get a free place
-            if (LuaObject.Node.Companion.isEqual(n!!, null)) { // cannot find a free place?
+            if (LuaObject.Node.Companion.isEqual(n, null)) { // cannot find a free place?
                 rehash(L, t, key) // grow table
                 return luaH_set(L, t, key) // re-insert key into grown table
             }
@@ -521,7 +521,7 @@ object LuaTable {
 //		 ** search function for integers
 //
     fun luaH_getnum(t: Table?, key: Int): TValue { // (1 <= key && key <= t.sizearray)
-        if ( (((key - 1).toLong() and 0xffffffffL) as Long) < (((t!!.sizearray as Long) and 0xffffffffL) as Long)) {
+        if ( (((key - 1).toLong() and 0xffffffffL).toLong()) < (((t!!.sizearray.toLong()) and 0xffffffffL).toLong())) {
             //uint - uint
             return t!!.array!!.get(key - 1)!!
         } else {

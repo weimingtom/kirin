@@ -338,7 +338,7 @@ object LuaLoadLib {
 //		 ** 'require' function
 //		 ** =======================================================
 //
-    private fun readable(filename: CharPtr): Int {
+    private fun readable(filename: CharPtr?): Int {
         val f: StreamProxy = CLib.fopen(filename, CharPtr.Companion.toCharPtr("r"))
             ?: // open failed
             return 0 // try to open file
@@ -363,7 +363,7 @@ object LuaLoadLib {
         return l
     }
 
-    private fun findfile(L: lua_State, name: CharPtr, pname: CharPtr): CharPtr? {
+    private fun findfile(L: lua_State, name: CharPtr?, pname: CharPtr?): CharPtr? {
         var name: CharPtr? = name
         var path: CharPtr?
         name = LuaAuxLib.luaL_gsub(
@@ -383,7 +383,7 @@ object LuaLoadLib {
         }
         Lua.lua_pushliteral(L, CharPtr.Companion.toCharPtr("")) // error accumulator
         while (CharPtr.Companion.isNotEqual(pushnexttemplate(L, path!!).also({ path = it }), null)) {
-            var filename: CharPtr
+            var filename: CharPtr?
             filename = LuaAuxLib.luaL_gsub(
                 L,
                 Lua.lua_tostring(L, -1),

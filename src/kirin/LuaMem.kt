@@ -890,7 +890,7 @@ object LuaMem {
             new_block[i] = old_block!![i]
         }
         for (i in old_size until new_size) {
-            new_block[i] = (t.Alloc() as Long).toLong() // System.Activator.CreateInstance(typeof(T));
+            new_block[i] = (t.Alloc() as Int).toLong() // System.Activator.CreateInstance(typeof(T));
         }
         if (CanIndex(t)) { //FIXME: not necessary
 //

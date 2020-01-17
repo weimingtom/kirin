@@ -1,18 +1,18 @@
 package kirin
 
-import kirin.LuaState.lua_State
 import kirin.CLib.CharPtr
+import kirin.Lua.lua_Alloc
 import kirin.Lua.lua_CFunction
-import kirin.LuaObject.TValue
-import kirin.LuaDo.Pfunc
-import kirin.LuaObject.Table
-import kirin.LuaZIO.ZIO
-import kirin.LuaState.global_State
-import kirin.LuaObject.Udata
 import kirin.Lua.lua_Reader
 import kirin.Lua.lua_Writer
-import kirin.Lua.lua_Alloc
+import kirin.LuaDo.Pfunc
 import kirin.LuaObject.Closure
+import kirin.LuaObject.TValue
+import kirin.LuaObject.Table
+import kirin.LuaObject.Udata
+import kirin.LuaState.global_State
+import kirin.LuaState.lua_State
+import kirin.LuaZIO.ZIO
 
 //
 // ** $Id: lapi.c,v 2.55.1.5 2008/07/04 18:41:18 roberto Exp $
@@ -136,10 +136,10 @@ object LuaAPI {
         to.nCcalls = from.nCcalls
     }
 
-    fun lua_atpanic(L: lua_State?, panicf: lua_CFunction?): lua_CFunction {
-        val old: lua_CFunction
+    fun lua_atpanic(L: lua_State?, panicf: lua_CFunction?): lua_CFunction? {
+        val old: lua_CFunction?
         LuaLimits.lua_lock(L)
-        old = LuaState.G(L)!!.panic!!
+        old = LuaState.G(L)!!.panic
         LuaState.G(L)!!.panic = panicf
         LuaLimits.lua_unlock(L)
         return old

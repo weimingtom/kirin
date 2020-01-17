@@ -27,7 +27,7 @@ object LuaBaseLib {
         Lua.lua_getglobal(L, CharPtr.Companion.toCharPtr("tostring"))
         i = 1
         while (i <= n) {
-            var s: CharPtr
+            var s: CharPtr?
             LuaAPI.lua_pushvalue(L, -1) // function to be called
             LuaAPI.lua_pushvalue(L, i) // value to print
             LuaAPI.lua_call(L, 1, 1)
@@ -379,7 +379,7 @@ object LuaBaseLib {
 
     private fun luaB_select(L: lua_State): Int {
         val n: Int = LuaAPI.lua_gettop(L)
-        return if (LuaAPI.lua_type(L, 1) == Lua.LUA_TSTRING && Lua.lua_tostring(L, 1).get(0) == '#') {
+        return if (LuaAPI.lua_type(L, 1) == Lua.LUA_TSTRING && Lua.lua_tostring(L, 1)!!.get(0) == '#') {
             LuaAPI.lua_pushinteger(L, n - 1)
             1
         } else {

@@ -39,7 +39,7 @@ object LuacProgram {
     private val Output: CharPtr = OUTPUT // default output file name
     private var output: CharPtr? = Output // actual output file name
     private var progname: CharPtr = PROGNAME // actual program name
-    private fun fatal(message: CharPtr) {
+    private fun fatal(message: CharPtr?) {
         CLib.fprintf(CLib.stderr, CharPtr.Companion.toCharPtr("%s: %s\n"), progname, message)
         System.exit(CLib.EXIT_FAILURE)
     }

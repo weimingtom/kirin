@@ -1,9 +1,10 @@
 package kirin
-import kirin.LuaState.lua_State
+
 import kirin.CLib.CharPtr
 import kirin.Lua.lua_CFunction
 import kirin.Lua.lua_Debug
 import kirin.Lua.lua_Hook
+import kirin.LuaState.lua_State
 
 //
 // ** $Id: lua.c,v 1.160.1.2 2007/12/28 15:32:23 roberto Exp $
@@ -42,7 +43,7 @@ object LuaProgram {
         )
     }
 
-    private fun l_message(pname: CharPtr?, msg: CharPtr) {
+    private fun l_message(pname: CharPtr?, msg: CharPtr?) {
         if (CharPtr.Companion.isNotEqual(pname, null)) {
             CLib.fprintf(CLib.stderr, CharPtr.Companion.toCharPtr("%s: "), pname)
         }
@@ -52,7 +53,7 @@ object LuaProgram {
 
     private fun report(L: lua_State?, status: Int): Int {
         if (status != 0 && !Lua.lua_isnil(L, -1)) {
-            var msg: CharPtr = Lua.lua_tostring(L, -1)
+            var msg: CharPtr? = Lua.lua_tostring(L, -1)
             if (CharPtr.Companion.isEqual(msg, null)) {
                 msg = CharPtr.Companion.toCharPtr("(error object is not a string)")
             }
@@ -144,8 +145,8 @@ object LuaProgram {
         return report(L, docall(L, 1, 1))
     }
 
-    private fun get_prompt(L: lua_State, firstline: Int): CharPtr {
-        var p: CharPtr
+    private fun get_prompt(L: lua_State, firstline: Int): CharPtr? {
+        var p: CharPtr?
         LuaAPI.lua_getfield(
             L,
             Lua.LUA_GLOBALSINDEX,
@@ -178,7 +179,7 @@ object LuaProgram {
         val buffer: CharPtr = CharPtr.Companion.toCharPtr(CharArray(LuaConf.LUA_MAXINPUT))
         val b = CharPtr(buffer)
         val l: Int
-        val prmt: CharPtr = get_prompt(L, firstline)
+        val prmt: CharPtr? = get_prompt(L, firstline)
         if (!LuaConf.lua_readline(L, b, prmt)) {
             return 0 // no input
         }

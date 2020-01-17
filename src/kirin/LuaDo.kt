@@ -1,21 +1,20 @@
 package kirin
-import kirin.LuaState.lua_State
+
 import kirin.CLib.CharPtr
 import kirin.Lua.lua_Debug
-import java.lang.Exception
-import kirin.LuaObject.TValue
-import kirin.LuaState.CallInfo
-import kirin.LuaConf.LuaException
 import kirin.Lua.lua_Hook
-import kirin.LuaObject.Proto
-import kirin.LuaObject.Table
-import kirin.LuaTM.TMS
-import kirin.LuaObject.LClosure
 import kirin.LuaCode.InstructionPtr
+import kirin.LuaConf.LuaException
+import kirin.LuaObject.LClosure
+import kirin.LuaObject.Proto
+import kirin.LuaObject.TValue
+import kirin.LuaObject.Table
 import kirin.LuaOpCodes.OpCode
-import kirin.LuaZIO.ZIO
-import kotlin.jvm.Volatile
+import kirin.LuaState.CallInfo
+import kirin.LuaState.lua_State
+import kirin.LuaTM.TMS
 import kirin.LuaZIO.Mbuffer
+import kirin.LuaZIO.ZIO
 import kotlin.experimental.and
 
 //

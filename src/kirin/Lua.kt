@@ -1,7 +1,7 @@
 package kirin
 
-import kirin.LuaState.lua_State
 import kirin.CLib.CharPtr
+import kirin.LuaState.lua_State
 
 //
 // ** $Id: lua.h,v 1.218.1.5 2008/08/06 13:30:12 roberto Exp $
@@ -141,9 +141,9 @@ object Lua {
         LuaAPI.lua_getfield(L!!, LUA_GLOBALSINDEX, s)
     }
 
-    fun lua_tostring(L: lua_State?, i: Int): CharPtr {
+    fun lua_tostring(L: lua_State?, i: Int): CharPtr? {
         val blah = IntArray(1) //uint
-        return LuaAPI.lua_tolstring(L!!, i, blah)!! //out
+        return LuaAPI.lua_tolstring(L!!, i, blah) //out
     }
 
     ////#define lua_open()	luaL_newstate()
