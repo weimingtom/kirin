@@ -41,6 +41,7 @@ object LuaOSLib {
         try {
             StreamProxy.Companion.Delete(filename.toString())
         } catch (e: Exception) {
+            e.printStackTrace()
             result = 0
         }
         return os_pushresult(L, result, filename)
@@ -54,6 +55,7 @@ object LuaOSLib {
             StreamProxy.Companion.Move(fromname.toString(), toname.toString())
             0
         } catch (e: Exception) {
+            e.printStackTrace()
             1 // todo: this should be a proper error code
         }
         return os_pushresult(L, result, fromname)

@@ -413,6 +413,7 @@ class ClassType(type: Int) {
             return try {
                 str!!.toDouble()
             } catch (e2: Exception) {
+                e2.printStackTrace()
                 if (isSuccess != null) {
                     isSuccess[0] = false
                 }

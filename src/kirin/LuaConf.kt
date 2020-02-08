@@ -455,7 +455,7 @@ object LuaConf {
     const val LUA_NUMBER_SCAN = "%lf"
     const val LUA_NUMBER_FMT = "%.14g"
     fun lua_number2str(n: Double): CharPtr {
-        if (n == (n as Long).toDouble()){
+        if (n == (n.toLong()).toDouble()){
             return CharPtr.Companion.toCharPtr(java.lang.Long.toString(n.toLong())) //FIXME:
         } else {
             return CharPtr.Companion.toCharPtr(java.lang.Double.toString(n)) //FIXME:

@@ -480,6 +480,7 @@ object LuaIOLib {
         try {
             getiofile(L, IO_OUTPUT)!!.Flush()
         } catch (e: Exception) {
+            e.printStackTrace()
             result = 0
         }
         return pushresult(L, result, null)
@@ -490,6 +491,7 @@ object LuaIOLib {
         try {
             tofile(L)!!.Flush()
         } catch (e: Exception) {
+            e.printStackTrace()
             result = 0
         }
         return pushresult(L, result, null)

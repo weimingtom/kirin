@@ -140,6 +140,7 @@ object LuaDo {
             try {
                 f.exec(L, ud)
             } catch (e: Exception) {
+                e.printStackTrace()
                 if (lj.status == 0) {
                     lj.status = -1
                 }
@@ -148,6 +149,7 @@ object LuaDo {
             try {
                 f.exec(L, ud)
             } catch (e: LuaException) {
+                e.printStackTrace()
                 if (lj.status == 0) {
                     lj.status = -1
                 }

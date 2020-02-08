@@ -145,6 +145,7 @@ object CLib {
             // ok, we're done
             result //ulong
         } catch (e: Exception) {
+            e.printStackTrace();
             end[0] = s
             0
         }
@@ -397,6 +398,7 @@ object CLib {
             }
             result / size
         } catch (e: Exception) {
+            e.printStackTrace()
             0
         }
     }
@@ -410,6 +412,7 @@ object CLib {
         try {
             stream!!.Write(bytes, 0, num_bytes)
         } catch (e: Exception) {
+            e.printStackTrace()
             return 0
         }
         return num
@@ -445,7 +448,7 @@ object CLib {
         var index = 0
         try {
             while (true) {
-                str[index] = stream!!.ReadByte() as Char
+                str[index] = stream!!.ReadByte().toChar();
                 if (str[index] == '\n') {
                     break
                 }
@@ -455,6 +458,7 @@ object CLib {
                 index++
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
         return str
     }
@@ -498,6 +502,7 @@ object CLib {
                 null
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             null
         }
     }
@@ -507,6 +512,7 @@ object CLib {
             stream!!.Flush()
             stream!!.Close()
         } catch (e: Exception) {
+            e.printStackTrace()
         }
         return fopen(filename, mode)
     }
